@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        .im1 {
+            background: url(../images/0.png);
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+        }
+    </style>
+
+    <title>記憶翻牌遊戲</title>
+</head>
+
+<body>
+    <div class="container mt-5 text-center">
+        <p class="text-capitalize">遊戲倒數:<span id="sec">5</span>秒開始</p>
+        <div class="my-3 ">
+            <div class="mb-1">
+                <span class="">
+                        <button type="button" id="c1" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c2" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c3" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c4" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+            </div>
+            <div class="mb-1">
+                <span class="">
+                        <button type="button" id="c5" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c6" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c7" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c8" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+            </div>
+            <div class="mb-1">
+                <span class="">
+                        <button type="button" id="c9" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c10" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c11" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c12" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+            </div>
+            <div class="mb-1">
+                <span class="">
+                        <button type="button" id="c13" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c14" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c15" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+                <span class=" ">
+                        <button type="button" id="c16" class="btn btn-success input-pad im1" value="" disabled></button>
+                </span>
+            </div>
+
+        </div>
+        <button type="button" id="start" class="btn btn-outline-secondary" onclick="startgame()">開始</button>
+        <!-- <button type="button" class="btn btn-outline-secondary" onclick="again()">再來一次</button> -->
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var inputButtons = document.getElementsByClassName("input-pad");
+        //var onButtons = document.getElementsByClassName("input-pad");
+        var item = $(".im1").toArray();
+        // var cardIndex = item.indexOf(this);
+        var t = 0; //翻的次數
+        var s = 0; //組數
+        var a = "",
+            a_v = "",
+            b = "",
+            b_v = "";
+
+        function startgame() {
+            $("#start").attr('disabled', true);
+            $("#sec").text("5");
+            var tt = document.getElementById("sec");
+            var n = 5;
+            var run = setInterval(function() {
+                n--;
+                tt.innerText = n;
+                if (n == 0) {
+                    clearInterval(run);
+                }
+            }, 1000);
+            var arr = [];
+            for (i = 0; i < 16; i++) {
+                arr[i] = i + 1;
+            }
+            var ran = new Array(16);
+            var x;
+            for (var i = 0; i < item.length; i++) {
+                x = Math.floor(Math.random() * (16 - i)) //因為沒一次都會移除掉一個  所以-i
+                ran[i] = arr.splice(x, 1);
+                if (ran[i] > 8) {
+                    ran[i] = ran[i] - 8;
+                    item[i].value = ran[i];
+                } else {
+                    item[i].value = ran[i];
+                }
+                $(item[i]).css("background-image", "url(images/" + item[i].value + ".jpg)");
+            }
+
+            setTimeout("$(item).css('background-image', 'url(images/0.png)')", 5000);
+
+            for (var j = 0; j < inputButtons.length; j++) {
+                inputButtons[j].onclick = inputButton; //如果inputButton()  加上括號代表會直接執行  若沒有刮號代表指示先把function掛上去
+                inputButtons[j].disabled = false;
+            }
+        }
+
+        function inputButton() {
+            var cardIndex = item.indexOf(this);
+            t += 1;
+            $(item[cardIndex]).css("background-image", "url(images/" + item[cardIndex].value + ".jpg)");
+
+            if (t % 2 == 1) {
+                a = $(this).attr("id");
+                a_v = $(this).attr("value");
+
+            } else {
+                b = $(this).attr("id");
+                b_v = $(this).attr("value");
+
+            }
+            if (t % 2 == 0) {
+                if (a_v == b_v) {
+                    s += 1;
+                    setTimeout("$('#' + a).css('background-image', 'url(images/9.png)')", 500);
+                    setTimeout("$('#' + b).css('background-image', 'url(images/9.png)')", 500);
+                    setTimeout("$('#' + a).attr('disabled', true)", 500);
+                    setTimeout("$('#' + b).attr('disabled', true)", 500);
+
+                    if (s == 8) {
+                        setTimeout("alert('恭喜完成啦~~~')", 500);
+                        setTimeout("$('#start').attr('disabled', false)", 500);
+
+                    }
+                } else {
+                    setTimeout("$('#' + a).css('background-image', 'url(images/0.png)')", 500);
+                    setTimeout("$('#' + b).css('background-image', 'url(images/0.png)')", 500);
+                }
+            }
+
+        }
+    </script>
+</body>
+
+</html>
