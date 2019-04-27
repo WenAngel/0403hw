@@ -145,7 +145,7 @@
                 }
             });
             $("input:button").click(function() {
-                for (var i = 0; i < 4; i++) {
+                for (var i = 0; i < 100; i++) {
                     var cells = $("#Puzzle div");
                     //找出空格所在位置，並取得其相鄰圖塊
                     var toMove = getNearPos(cells.index($("#Pic0")[0]));
