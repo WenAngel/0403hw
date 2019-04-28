@@ -117,23 +117,23 @@
                 //找尋上下左右有沒有Pic0，有則可以與它交換位置
                 //先找出元素是16個中第幾個?
                 var cells = $("#Puzzle div");
-                var i = cells.index(this);
-                var toCheck = getNearPos(i);
+                var i1 = cells.index(this);
+                var toCheck = getNearPos(i1);
                 while (toCheck.length > 0) {
                     var j = toCheck.pop();
                     if (cells.eq(j).attr("id") == "Pic0") //為空白格，交換位子
                     {
                         //排序，必要時對調，讓i < j
-                        if (i > j) {
+                        if (i1 > j) {
                             var k = j;
-                            j = i;
-                            i = k;
+                            j = i1;
+                            i1 = k;
                         }
-                        var ahead = cells.eq(i);
+                        var ahead = cells.eq(i1);
                         var behind = cells.eq(j);
                         var behindPrev = behind.prev();
                         //左右對調
-                        if (Math.abs(i - j) == 1)
+                        if (Math.abs(i1 - j) == 1)
                             behind.after(ahead);
                         else //上下對調
                         {
@@ -145,7 +145,7 @@
                 }
             });
             $("input:button").click(function() {
-                for (var i = 0; i < 100; i++) {
+                for (var i = 0; i < 500; i++) {
                     var cells = $("#Puzzle div");
                     //找出空格所在位置，並取得其相鄰圖塊
                     var toMove = getNearPos(cells.index($("#Pic0")[0]));
