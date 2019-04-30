@@ -81,7 +81,7 @@
                 var x = i % 4;
                 var y = parseInt(i / 4); //圖的四分之一
 
-                $("#Pic" + i + " img").css("margin-left", x * -120 + 1).css("margin-top", y * -120 + 1);
+                $("#Pic" + i + " img").css("margin-left", x * -120).css("margin-top", y * -120);
                 console.log(i + ": " + x + "," + y);
                 //第i個換成第x行第y列 將位置轉成座標
                 posConv[i] = {
@@ -123,7 +123,7 @@
                     var j = toCheck.pop();
                     if (cells.eq(j).attr("id") == "Pic0") //為空白格，交換位子
                     {
-                        //排序，必要時對調，讓i < j
+                        //排序，必要時對調，讓i1 < j
                         if (i1 > j) {
                             var k = j;
                             j = i1;
@@ -145,7 +145,7 @@
                 }
             });
             $("input:button").click(function() {
-                for (var i = 0; i < 500; i++) {
+                for (var i = 0; i < 4; i++) {
                     var cells = $("#Puzzle div");
                     //找出空格所在位置，並取得其相鄰圖塊
                     var toMove = getNearPos(cells.index($("#Pic0")[0]));
